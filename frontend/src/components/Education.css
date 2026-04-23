@@ -1,0 +1,295 @@
+.edu-container {
+  padding: 6rem 2rem;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.edu-title { display: none; }
+
+.edu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 860px;
+  width: 100%;
+}
+
+/* ── Flip card scene ── */
+.edu-card-scene {
+  width: 100%;
+  perspective: 1400px;
+}
+
+.edu-card-flipper {
+  position: relative;
+  width: 100%;
+  min-height: 240px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.edu-card-flipper.flipped {
+  transform: rotateY(180deg);
+}
+
+.edu-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(12px);
+}
+
+/* ── FRONT ── */
+.edu-front {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Left stamp panel */
+.edu-stamp-panel {
+  width: 160px;
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.3);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+  position: relative;
+}
+
+.edu-stamp-panel::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--edu-accent) 12%, transparent), transparent 60%);
+  pointer-events: none;
+}
+
+.edu-stamp-ring {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--edu-accent) 50%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--edu-accent) 20%, transparent);
+  z-index: 1;
+}
+
+.edu-stamp-logo {
+  width: 56px; height: 56px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.edu-stamp-badge {
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1.5px solid;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  z-index: 1;
+  transform: rotate(-8deg);
+}
+
+.edu-stamp-short {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.12);
+  letter-spacing: 2px;
+  z-index: 1;
+}
+
+/* Right info panel */
+.edu-info-panel {
+  flex: 1;
+  padding: 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  position: relative;
+}
+
+.edu-info-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.edu-location {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.edu-date-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--edu-accent);
+  background: color-mix(in srgb, var(--edu-accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--edu-accent) 30%, transparent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+.edu-uni-name {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.edu-degree-name {
+  font-size: 0.9rem;
+  color: var(--edu-accent);
+  font-weight: 600;
+}
+
+.edu-gpa-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.edu-gpa-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 0.4rem 0.9rem;
+  background: rgba(255,255,255,0.02);
+}
+
+.edu-gpa-val {
+  font-size: 1.1rem;
+  font-weight: 900;
+  font-family: 'Outfit', sans-serif;
+}
+
+.edu-gpa-label {
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.edu-highlight {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.edu-courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.edu-course-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.03);
+  transition: all 0.2s;
+}
+
+.edu-more-chip {
+  color: var(--cyan-accent);
+  border-color: rgba(0,240,255,0.3);
+  cursor: pointer;
+}
+
+.edu-flip-hint {
+  position: absolute;
+  bottom: 0.7rem;
+  right: 1rem;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+/* ── BACK ── */
+.edu-back {
+  transform: rotateY(180deg);
+  padding: 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.edu-back-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid;
+}
+
+.edu-back-logo {
+  width: 44px; height: 44px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  padding: 3px;
+}
+
+.edu-back-header h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.edu-back-header p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.edu-back-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.edu-back-courses .edu-course-chip {
+  background: rgba(255,255,255,0.03);
+}
+
+@media (max-width: 600px) {
+  .edu-front { flex-direction: column; }
+  .edu-stamp-panel { width: 100%; flex-direction: row; padding: 1rem 1.5rem; height: auto; }
+  .edu-stamp-ring { width: 56px; height: 56px; }
+  .edu-stamp-logo { width: 40px; height: 40px; }
+  .edu-card-flipper { min-height: 380px; }
+}

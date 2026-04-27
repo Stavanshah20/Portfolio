@@ -1,26 +1,20 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import './Dock.css';
 
 const DockItem = ({ section, isActive, onOpen, onClose, mouseX }) => {
-  const ref = { current: null };
+  const ref = useRef(null);
 
-  const distance = useMotionValue(200);
+  const distance = useMotionValue(Infinity);
   const widthSync = useTransform(distance, [-150, 0, 150], [52, 80, 52]);
   const width = useSpring(widthSync, { stiffness: 300, damping: 25 });
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const center = rect.left + rect.width / 2;
-    distance.set(mouseX.get() - center);
-  };
-
   return (
     <motion.button
+      ref={ref}
       className={`dock-item ${isActive ? 'dock-item--active' : ''}`}
       style={{ width, height: width }}
-      onMouseMove={handleMouseMove}
-      onClick={() => isActive ? onClose() : onOpen(section.id)}
+      onClick={() => isActive ? onClose(null) : onOpen(section.id)}
       title={section.label}
       whileTap={{ scale: 0.9 }}
     >
@@ -34,6 +28,8 @@ const DockItem = ({ section, isActive, onOpen, onClose, mouseX }) => {
 const Dock = ({ sections, active, onOpen, onClose }) => {
   const mouseX = useMotionValue(Infinity);
 
+  // Propagate mouseX to all items via a shared motion value
+  // Each item reads it via useTransform based on its own ref position
   return (
     <motion.div
       className="dock-wrap"
@@ -45,7 +41,7 @@ const Dock = ({ sections, active, onOpen, onClose }) => {
     >
       <div className="dock-bar">
         {sections.map((s) => (
-          <DockItem
+          <DockItemConnected
             key={s.id}
             section={s}
             isActive={active === s.id}
@@ -69,6 +65,37 @@ const Dock = ({ sections, active, onOpen, onClose }) => {
         </a>
       </div>
     </motion.div>
+  );
+};
+
+// Separate component so each item has its own ref + distance tracking
+const DockItemConnected = ({ section, isActive, onOpen, onClose, mouseX }) => {
+  const ref = useRef(null);
+
+  const distance = useTransform(mouseX, (val) => {
+    const el = ref.current;
+    if (!el) return Infinity;
+    const rect = el.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+    return val - center;
+  });
+
+  const widthSync = useTransform(distance, [-120, 0, 120], [52, 80, 52]);
+  const width = useSpring(widthSync, { stiffness: 300, damping: 28, mass: 0.5 });
+
+  return (
+    <motion.button
+      ref={ref}
+      className={`dock-item ${isActive ? 'dock-item--active' : ''}`}
+      style={{ width, height: width }}
+      onClick={() => isActive ? onClose(null) : onOpen(section.id)}
+      title={section.label}
+      whileTap={{ scale: 0.9 }}
+    >
+      <span className="dock-emoji">{section.emoji}</span>
+      <span className="dock-label">{section.label}</span>
+      {isActive && <span className="dock-dot" />}
+    </motion.button>
   );
 };
 

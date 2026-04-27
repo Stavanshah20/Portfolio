@@ -127,10 +127,17 @@
   margin: 0;
 }
 .hero-name-accent {
-  background: linear-gradient(135deg, var(--accent-color) 0%, var(--cyan-accent) 100%);
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--cyan-accent) 50%, var(--accent-color) 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 /* ── Typewriter ── */
@@ -200,8 +207,11 @@
   font-weight: 800;
   font-size: 0.95rem;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   transition: opacity 0.2s, transform 0.2s;
   letter-spacing: 0.3px;
+  font-family: 'Inter', sans-serif;
 }
 .hero-cta-primary:hover { opacity: 0.85; transform: translateY(-3px); }
 

@@ -1,0 +1,236 @@
+/* ── Backdrop ── */
+.panel-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+}
+
+/* ── Sheet ── */
+.panel-sheet {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(94vw, 1100px);
+  height: 100vh;
+  background: rgba(6, 4, 22, 0.98);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -24px 0 100px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+/* ── Scroll progress bar ── */
+.panel-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), var(--cyan-accent));
+  z-index: 10;
+  transform-origin: left;
+}
+
+/* ── Header ── */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.panel-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.panel-emoji { font-size: 1.2rem; }
+
+.panel-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ── Section nav arrows ── */
+.panel-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.panel-nav-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.panel-nav-btn:hover:not(:disabled) {
+  background: rgba(0,240,255,0.1);
+  border-color: rgba(0,240,255,0.3);
+  color: var(--cyan-accent);
+}
+.panel-nav-btn:disabled { opacity: 0.25; cursor: default; }
+
+.panel-nav-count {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  font-family: 'Courier New', monospace;
+  min-width: 36px;
+  text-align: center;
+}
+
+/* ── Close ── */
+.panel-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.panel-close:hover {
+  background: rgba(255, 80, 80, 0.18);
+  color: #ff5f57;
+  border-color: rgba(255, 80, 80, 0.3);
+}
+
+/* ── Section pills strip ── */
+.panel-pills {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.5rem 1.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.2);
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+.panel-pills::-webkit-scrollbar { display: none; }
+
+.panel-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.panel-pill:hover {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.8);
+}
+.panel-pill.active {
+  background: rgba(0,240,255,0.12);
+  border-color: rgba(0,240,255,0.35);
+  color: var(--cyan-accent);
+}
+
+/* ── Body ── */
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.panel-body::-webkit-scrollbar { width: 3px; }
+.panel-body::-webkit-scrollbar-track { background: transparent; }
+.panel-body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+}
+.panel-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,240,255,0.25);
+}
+
+/* Fix About cutting — sections must not use 100vw */
+.panel-body section {
+  scroll-margin-top: 0;
+  width: 100%;
+}
+
+.panel-body .about-container {
+  width: 100%;
+  min-height: unset;
+  padding: 3rem 2rem;
+}
+
+.panel-body .about-content {
+  max-width: 100%;
+}
+
+.panel-body .about-images {
+  max-width: 360px;
+  height: 400px;
+  flex-shrink: 0;
+}
+
+.panel-body .img-primary  { width: 250px; height: 320px; }
+.panel-body .img-secondary { width: 230px; height: 300px; }
+
+/* ── Footer nav ── */
+.panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.6rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.3);
+  flex-shrink: 0;
+}
+
+.panel-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.panel-footer-btn:hover {
+  background: rgba(0,240,255,0.08);
+  border-color: rgba(0,240,255,0.25);
+  color: var(--cyan-accent);
+}

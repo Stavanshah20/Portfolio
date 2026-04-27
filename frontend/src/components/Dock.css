@@ -1,0 +1,129 @@
+.dock-wrap {
+  position: fixed;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.dock-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  background: rgba(20, 20, 35, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 0.6rem 0.8rem;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ── Each icon button ── */
+.dock-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  gap: 0;
+  overflow: visible;
+}
+
+.dock-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.dock-item--active {
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  animation: dockPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes dockPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,240,255,0.2); }
+  50%       { box-shadow: 0 0 0 6px rgba(0,240,255,0); }
+}
+
+.dock-emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Tooltip label */
+.dock-label {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.dock-item:hover .dock-label,
+.dock-resume:hover .dock-label {
+  opacity: 1;
+}
+
+/* Active dot */
+.dock-dot {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--cyan-accent);
+}
+
+/* ── Divider ── */
+.dock-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 0.2rem;
+  align-self: center;
+}
+
+/* ── Resume link ── */
+.dock-resume {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.dock-resume:hover {
+  background: rgba(0, 240, 255, 0.2);
+  transform: translateY(-4px);
+}

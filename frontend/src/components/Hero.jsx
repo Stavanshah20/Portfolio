@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaArrowDown, FaLayerGroup, FaRobot, FaNetworkWired, FaBrain } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaLayerGroup, FaRobot, FaNetworkWired, FaBrain } from 'react-icons/fa';
 import './Hero.css';
 
 const ROLES = [
@@ -19,7 +19,7 @@ const PARTICLES = Array.from({ length: 60 }, (_, i) => ({
   delay: Math.random() * 6,
 }));
 
-const Hero = () => {
+const Hero = ({ onOpen }) => {
   const [roleIdx, setRoleIdx] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [typing, setTyping] = useState(true);
@@ -95,21 +95,40 @@ const Hero = () => {
       </div>
 
       {/* Floating side badges */}
-      <motion.div className="floating-badge fb-1" animate={{ y: [0, -14, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}>
-        <FaLayerGroup style={{ color: '#00f0ff' }} />
-        <span>Full-Stack Apps</span>
+      <motion.div
+        className="floating-badge fb-1"
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0, y: [0, -14, 0] }}
+        transition={{ opacity: { delay: 1.1, duration: 0.6 }, x: { delay: 1.1, duration: 0.6, type: 'spring' }, y: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.6 } }}
+      >
+        <FaLayerGroup style={{ color: '#00f0ff' }} /><span>Full-Stack Apps</span>
       </motion.div>
-      <motion.div className="floating-badge fb-2" animate={{ y: [0, 16, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
-        <FaRobot style={{ color: '#bb86fc' }} />
-        <span>AI Agents</span>
+
+      <motion.div
+        className="floating-badge fb-2"
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0, y: [0, 16, 0] }}
+        transition={{ opacity: { delay: 1.3, duration: 0.6 }, x: { delay: 1.3, duration: 0.6, type: 'spring' }, y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.8 } }}
+      >
+        <FaRobot style={{ color: '#bb86fc' }} /><span>AI Agents</span>
       </motion.div>
-      <motion.div className="floating-badge fb-3" animate={{ y: [0, -18, 0] }} transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}>
-        <FaNetworkWired style={{ color: '#FF9900' }} />
-        <span>Distributed Systems</span>
+
+      <motion.div
+        className="floating-badge fb-3"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0, y: [0, -18, 0] }}
+        transition={{ opacity: { delay: 1.2, duration: 0.6 }, x: { delay: 1.2, duration: 0.6, type: 'spring' }, y: { duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1.7 } }}
+      >
+        <FaNetworkWired style={{ color: '#FF9900' }} /><span>Distributed Systems</span>
       </motion.div>
-      <motion.div className="floating-badge fb-4" animate={{ y: [0, 12, 0] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}>
-        <FaBrain style={{ color: '#00E676' }} />
-        <span>ML / DL Models</span>
+
+      <motion.div
+        className="floating-badge fb-4"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0, y: [0, 12, 0] }}
+        transition={{ opacity: { delay: 1.4, duration: 0.6 }, x: { delay: 1.4, duration: 0.6, type: 'spring' }, y: { duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.9 } }}
+      >
+        <FaBrain style={{ color: '#00E676' }} /><span>ML / DL Models</span>
       </motion.div>
 
       <div className="hero-center">
@@ -174,9 +193,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
         >
-          <a href="#projects" className="hero-cta-primary">
+          <button className="hero-cta-primary" onClick={() => onOpen('projects')}>
             See My Work
-          </a>
+          </button>
           <a href="https://github.com/Stavanshah20" target="_blank" rel="noreferrer" className="hero-cta-ghost">
             <FaGithub /> GitHub
           </a>
@@ -186,16 +205,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Scroll hint */}
-      <motion.a
-        href="#about"
-        className="hero-scroll"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-      >
-        <FaArrowDown />
-      </motion.a>
+      {/* Scroll hint removed — dock navigation replaces scrolling */}
     </div>
   );
 };

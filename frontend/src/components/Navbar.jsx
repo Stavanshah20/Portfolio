@@ -24,7 +24,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="https://drive.google.com/file/d/1Vvg2yxZp1ZyhIP12tb01d6u7Ys58MLjA/view?usp=sharing"
+            href="https://drive.google.com/file/d/1R74IY1Hi0Rwn_Ppu79H36dhAzBr2299x/view?usp=sharing"
             target="_blank"
             rel="noreferrer"
             className="navbar-resume-btn"
